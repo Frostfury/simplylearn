@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index"
-  }, 
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Frostfury/simplylearn.git"
@@ -20,6 +20,7 @@
   "dependencies": {
     "all": "0.0.0",
     "body-parser": "^1.19.0",
+    "ejs": "^3.1.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "http": "0.0.1-security",

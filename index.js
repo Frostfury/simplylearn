@@ -3,8 +3,8 @@ var express                 =   require('express'),
     http                    =   require('http').Server(app),
     io                      =   require('socket.io')(http),
     bodyParser              =   require("body-parser"),
-    moment                  =   require("moment");
-const path = require('path');
+    moment                  =   require("moment"),
+    path                    =   require('path');
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,"views")));
@@ -14,7 +14,11 @@ app.use(express.static(path.join(__dirname,"views")));
 const PORT = process.env.PORT || 1690   
 
 app.get("/",function(req,res){
-    res.send("index");
+    res.render("index");
+});
+
+app.get("/teacher",function(req,res){
+    res.render("teacher");
 });
 
 server=http.listen(PORT,function(){
