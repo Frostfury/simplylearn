@@ -5,7 +5,6 @@ var express                 =   require('express'),
     bodyParser              =   require("body-parser"),
     multer                  =   require("multer"),
     mongoose                =   require("mongoose"),
-    flash                   = require("connect-flash"),
     moment                  =   require("moment"),
     path                    =   require('path'),
     fs                      =   require('fs-extra'),
@@ -45,20 +44,7 @@ app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/uploads',express.static('uploads'));
 app.use(express.static(path.join(__dirname,"views")));
-app.use(require("express-session")({
-    secret:"This is a secret so Shush",
-    resave:false,
-    saveUninitialized:false
-}));
-app.use(flash()); 
-app.use(function(req,res,next){
-    res.locals.currentUser  = req.user;
-    res.locals.error        = req.flash("error");
-    res.locals.success      = req.flash("success");
-    next();
-});
-// app.use(express.static(__dirname + '/routes'));
-// app.use(methodOverride("_method"));
+
 
 const PORT = process.env.PORT || 1690   
 
