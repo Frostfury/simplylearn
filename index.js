@@ -95,7 +95,6 @@ app.get("/session/:id/teacher",function(req,res){
             res.redirect("/teacher");
         }
         else{
-            console.log(data);
             res.render("presentation-page-teacher",{data:data});
         }
     });
@@ -112,7 +111,14 @@ app.get("/session/:id",function(req,res){
             res.render("presentation-page-student");
       
 });
-// app.get("/session/:id")
+
+io.on('connection',function(socket){
+    console.log("connected");
+
+    // socket.on('disconnect',()=>{
+    //     userLeave(socket.id);
+    //   })
+})
 server=http.listen(PORT,function(){
     console.log("Runnning on 1690");
 });
