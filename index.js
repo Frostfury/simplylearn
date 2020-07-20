@@ -101,15 +101,15 @@ app.get("/session/:id/teacher",function(req,res){
 });
 
 app.get("/session/:id",function(req,res){
-    // teacherSchema.findById(req.params.id,function(err,data){
-    //     if(err){
-    //         console.log(err);
-    //         res.redirect("/teacher");
-    //     }
-    //     else{
-    //         console.log(data);
-            res.render("presentation-page-student");
-      
+    teacherSchema.findById(req.params.id,function(err,data){
+        if(err){
+            console.log(err);
+            res.redirect("/teacher");
+        }
+        else{
+            res.render("presentation-page-student",{data:data});
+        }
+    });
 });
 
 io.on('connection',function(socket){
