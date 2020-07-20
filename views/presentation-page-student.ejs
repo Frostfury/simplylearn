@@ -101,6 +101,7 @@ img {
 <body>
 
 <h2 style="text-align:center">Students View</h2>
+<p id="session_id" style="display: none;"><%=data._id%></p>
 
 <div class="container">
     <%if(data.pptimages.length>1){%>
@@ -146,8 +147,15 @@ img {
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
+const room = document.getElementById("session_id").innerText;
+
 const socket=io();
 
+socket.emit("joinRoom",{room});
+
+socket.on('changeslide',n =>{
+  currentSlide(n);
+})
 
 var slideIndex = 1;
 showSlides(slideIndex);
