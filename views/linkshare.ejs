@@ -4,18 +4,20 @@
     <link rel="stylesheet" type="text/css" href="teacher.css">
     
 </head>
-<body>
+<body style="background-color: #3b404e;">
 
 
-<div>
+<div style="margin: 65px 200px; border: 5px solid #171717; border-radius: 5px; background-color: azure;">
   <!-- <form action="/action_page.php"> -->
-    <label for="tlnk">Student Session's link:/session/<%=data._id%></label>
+    <form style="padding: 25px;font-size: 2em;">
+    <label for="tlnk">Student Session's link: <span style="border:2px solid black;padding: 3px 5px;background-color:#ececec;">/session/<%=data._id%></span></label>
     <input type="text" id="myInput" value="localhost:1690/session/<%=data._id%>" hidden>
 
-        <button onclick="myFunction()">/session/<%=data._id%></button>
+        <button onclick="myFunction()" style="padding: 10px;font-size: 2rem;border:3px solid #171717;border-radius: 5px;background-color: #45e0a0;">Copy link</button>
         <br>
         <br>
-    <a href="/session/<%=data._id%>/teacher">Start Session</a>
+    <a href="/session/<%=data._id%>/teacher" style="padding: 10px 15px;font-size: 2rem;border:3px solid #171717;border-radius: 15px;background-color: #1eaafc;color: #e9e9e9; text-decoration: none;">Start Session</a>
+    </form>
 </div>
 <script>
     function myFunction() {
