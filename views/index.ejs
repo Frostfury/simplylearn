@@ -50,7 +50,25 @@ padding-bottom: 20px;
   }
   
   
+  @media only screen and (max-width: 1200px) {
+    .container {
+  display: grid;
+  width:1500px;
+  
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 367px);
+  grid-gap: 1rem;
 
+  justify-content: center;
+  align-items: center;
+}
+.item{
+ 
+  /* background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%); */
+  height: 300px;
+}
+
+  }
 </style>
 </head>
 <body style="background-color: #3b404e;">
