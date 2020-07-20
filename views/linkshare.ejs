@@ -8,19 +8,16 @@
 
 
 <div>
-  <form action="/action_page.php">
-    <label for="tlnk">Teacher's link</label>
-    <input type="text" value="link comes here" id="myInput">
+  <!-- <form action="/action_page.php"> -->
+    <label for="tlnk">Session's link:/session/<%=data._id%></label>
 
-        <button onclick="myFunction()">Copy link</button>
+        <button onclick="myFunction()">/session/<%=data._id%></button>
         <br>
         <br>
-    <label for="slnk">Student's link</label>
-    <input type="text" value="link comes here" id="myInput">
-
-        <button onclick="myFunction()">Copy link</button>
-    <input type="start" value="Start Class">
-  </form>
+    <form action="/session/<%=data._id%>" method="POST">
+      <input type="submit" value="Start Class">
+    </form>
+  <!-- </form> -->
 </div>
 <script>
     function myFunction() {
