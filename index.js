@@ -10,7 +10,7 @@ var express                 =   require('express'),
     fs                      =   require('fs-extra'),
     teacherSchema           =   require("./models/teacher");
 
-mongoose.connect("mongodb://localhost:27017/simplylearn");
+mongoose.connect("mongodb://localhost:27017/simplylearn", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);    
 
 var storage = multer.diskStorage({
