@@ -114,12 +114,15 @@ app.get("/session/:id",function(req,res){
 });
 
 io.on('connection',function(socket){
-    console.log("connected");
     socket.on('joinRoom',({room})=>{
-        console.log("room:"+room);
         const user = userJoin(socket.id, room);
-        console.log(user);
         socket.join(user.room);
+      })
+
+      socket.on('currentslide',n =>{
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit('changeslide',n);
+
       })
 
     socket.on('disconnect',()=>{
