@@ -44,8 +44,7 @@ app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/uploads',express.static('uploads'));
 app.use(express.static(path.join(__dirname,"views")));
-// app.use(express.static(__dirname + '/routes'));
-// app.use(methodOverride("_method"));
+
 
 const PORT = process.env.PORT || 1690   
 
@@ -67,9 +66,12 @@ app.post("/teacher",uploads.array("pptimages",25),function(req,res){
     newTeacher.save(function(err,savedata){
         if(err){
             console.log(err);
+            req.flash('error','Error while saving details try again');
             res.redirect("/teacher");
         }
         else{
+            req.flash('success','Successfully saved data');
+
             res.redirect("/teacher/"+savedata._id);
         }
     })
