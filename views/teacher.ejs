@@ -4,20 +4,18 @@
     <link rel="stylesheet" type="text/css" href="teacher.css">
 </head>
 <body style="background-color: #3b404e;">
-
-
 <div>
   <form action="/teacher" method="post" enctype="multipart/form-data">
     <label for="fname">First Name</label>
-    <input type="text" id="fname" name="name" placeholder="Your name..">
+    <input type="text" id="fname" name="name" placeholder="Your name.." required>
 
     <label for="cname">Class Name</label>
-    <input type="text" id="cname" name="classname" placeholder="Your class name..">
+    <input type="text" id="cname" name="classname" placeholder="Your class name.." required>
 
     <label for="image">Image Upload</label>
     <br>
     
-    <input type="file" id="myFile" name="pptimages" multiple >
+    <input type="file" id="myFile" name="pptimages" multiple required>
      
       
     <input type="submit" value="Submit">
