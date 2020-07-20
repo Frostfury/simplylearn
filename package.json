@@ -4,8 +4,9 @@
   "description": "A application used to make learning more esay",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "start": "node index",
+    "dev": "nodemon index"
+  }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Frostfury/simplylearn.git"
@@ -24,6 +25,7 @@
     "http": "0.0.1-security",
     "moment": "^2.27.0",
     "multer": "^1.4.2",
+    "nodemon": "^2.0.4",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
