@@ -1,14 +1,15 @@
-var express                 =   require('express'),
-    app                     =   express(),
-    http                    =   require('http').Server(app),
-    io                      =   require('socket.io')(http),
-    bodyParser              =   require("body-parser"),
-    multer                  =   require("multer"),
-    mongoose                =   require("mongoose"),
-    moment                  =   require("moment"),
-    path                    =   require('path'),
-    fs                      =   require('fs-extra'),
-    teacherSchema           =   require("./models/teacher");
+var express                                 =   require('express'),
+    app                                     =   express(),
+    http                                    =   require('http').Server(app),
+    io                                      =   require('socket.io')(http),
+    bodyParser                              =   require("body-parser"),
+    multer                                  =   require("multer"),
+    mongoose                                =   require("mongoose"),
+    moment                                  =   require("moment"),
+    path                                    =   require('path'),
+    fs                                      =   require('fs-extra'),
+    {userJoin,getCurrentUser,userLeave}     =   require("./utils/users"),
+    teacherSchema                           =   require("./models/teacher");
 
 mongoose.connect("mongodb://localhost:27017/simplylearn", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);    
@@ -66,11 +67,9 @@ app.post("/teacher",uploads.array("pptimages",25),function(req,res){
     newTeacher.save(function(err,savedata){
         if(err){
             console.log(err);
-            req.flash('error','Error while saving details try again');
             res.redirect("/teacher");
         }
         else{
-            req.flash('success','Successfully saved data');
 
             res.redirect("/teacher/"+savedata._id);
         }
@@ -116,10 +115,16 @@ app.get("/session/:id",function(req,res){
 
 io.on('connection',function(socket){
     console.log("connected");
+    socket.on('joinRoom',({room})=>{
+        console.log("room:"+room);
+        const user = userJoin(socket.id, room);
+        console.log(user);
+        socket.join(user.room);
+      })
 
-    // socket.on('disconnect',()=>{
-    //     userLeave(socket.id);
-    //   })
+    socket.on('disconnect',()=>{
+        userLeave(socket.id);
+      })
 })
 server=http.listen(PORT,function(){
     console.log("Runnning on 1690");
