@@ -4,16 +4,21 @@ var express                 =   require('express'),
     io                      =   require('socket.io')(http),
     bodyParser              =   require("body-parser"),
     multer                  =   require("multer"),
-    mongoose                = require("mongoose"),
+    mongoose                =   require("mongoose"),
     moment                  =   require("moment"),
-    path                    =   require('path');
+    path                    =   require('path'),
+    fs                      =   require('fs-extra'),
+    teacherSchema           =   require("./models/teacher");
 
 mongoose.connect("mongodb://localhost:27017/simplylearn");
 mongoose.set('useFindAndModify', false);    
 
 var storage = multer.diskStorage({
     destination: function(req,file,cb){
-      cb(null,'./uploads');
+        let name = req.body.name;
+        let path = './uploads/'+name;
+        fs.mkdirsSync(path);
+      cb(null,path);
     },
     filename: function(req,file,cb){
       cb(null,file.originalname);
@@ -53,8 +58,24 @@ app.get("/teacher",function(req,res){
 });
 
 app.post("/teacher",uploads.array("pptimages",25),function(req,res){
-    console.log(req.body);
-    console.log(req.files);
+ 
+    var newTeacher = teacherSchema();
+
+    newTeacher.name = req.body.name;
+    newTeacher.classname = req.body.classname;
+    req.files.forEach(function(file){
+        newTeacher.pptimages.push(file.path);
+    });
+    newTeacher.save(function(err,savedata){
+        if(err){
+            console.log(err);
+            res.redirect("/teacher");
+        }
+        else{
+            console.log(savedata);
+            res.redirect("/teacher");
+        }
+    })
     
 });
 
