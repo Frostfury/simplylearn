@@ -88,6 +88,30 @@ app.get("/teacher/:id",function(req,res){
     });
 });
 
+app.get("/session/:id/teacher",function(req,res){
+    teacherSchema.findById(req.params.id,function(err,data){
+        if(err){
+            console.log(err);
+            res.redirect("/teacher");
+        }
+        else{
+            console.log(data);
+            res.render("presentation-page-teacher",{data:data});
+        }
+    });
+});
+
+app.get("/session/:id",function(req,res){
+    // teacherSchema.findById(req.params.id,function(err,data){
+    //     if(err){
+    //         console.log(err);
+    //         res.redirect("/teacher");
+    //     }
+    //     else{
+    //         console.log(data);
+            res.render("presentation-page-student");
+      
+});
 // app.get("/session/:id")
 server=http.listen(PORT,function(){
     console.log("Runnning on 1690");

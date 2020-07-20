@@ -9,15 +9,12 @@
 
 <div>
   <!-- <form action="/action_page.php"> -->
-    <label for="tlnk">Session's link:/session/<%=data._id%></label>
+    <label for="tlnk">Student Session's link:/session/<%=data._id%></label>
 
         <button onclick="myFunction()">/session/<%=data._id%></button>
         <br>
         <br>
-    <form action="/session/<%=data._id%>" method="POST">
-      <input type="submit" value="Start Class">
-    </form>
-  <!-- </form> -->
+    <a href="/session/<%=data._id%>/teacher">Start Session</a>
 </div>
 <script>
     function myFunction() {
