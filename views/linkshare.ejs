@@ -11,7 +11,7 @@
   <!-- <form action="/action_page.php"> -->
     <form style="padding: 25px;font-size: 2em;">
     <label for="tlnk">Student Session's link: <span style="border:2px solid black;padding: 3px 5px;background-color:#ececec;">/session/<%=data._id%></span></label>
-    <input type="text" id="myInput" value="localhost:1690/session/<%=data._id%>" hidden>
+    <input type="text" id="myInput" value="localhost:1690/session/<%=data._id%>" style="display: none;">
 
         <button onclick="myFunction()" style="padding: 10px;font-size: 2rem;border:3px solid #171717;border-radius: 5px;background-color: #45e0a0;">Copy link</button>
         <br>
@@ -20,13 +20,15 @@
     </form>
 </div>
 <script>
-    function myFunction() {
-      var copyText = document.getElementById("myInput");
-      copyText.select();
-      copyText.setSelectionRange(0, 99999)
-      document.execCommand("copy");
-      alert("Copied the text: " + copyText.value);
-    }
+
+function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+   alert("Copied the text: " + copyText.value);
+}
+
     </script>
     
 </body>
