@@ -121,6 +121,35 @@ app.get("/session/:id",function(req,res){
     });
 });
 
+app.post("/session/:id/teacher",function(req,res){
+    teacherSchema.findById(req.params.id,function(err,data){
+        if(err){
+            console.log(err);
+            res.redirect("/teacher");
+        }
+        else{
+            let path = './uploads/'+data.name;
+            fs.remove(path,function(err){
+                if(err){
+                    console.log(err);
+                    res.redirect("/teacher");
+                }
+                else{
+                    teacherSchema.deleteOne({_id:data._id},function(err){
+                        if(err){
+                            console.log(err);
+                            res.redirect("/teacher");
+                        }
+                        else{
+                            res.redirect("/");
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
+
 io.on('connection',function(socket){
     socket.on('joinRoom',({room})=>{
         const user = userJoin(socket.id, room);
@@ -135,8 +164,10 @@ io.on('connection',function(socket){
 
     socket.on('disconnect',()=>{
         userLeave(socket.id);
-      })
-})
+      });
+});
+
+
 server=http.listen(PORT,function(){
     console.log("Runnning on 1690");
 });
