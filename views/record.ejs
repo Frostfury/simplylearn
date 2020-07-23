@@ -1,61 +1,35 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<head>
-     
-<link
-href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
-rel="stylesheet"
-/>
-</head>
 <style>
-  :root {
-    font-size: 16px;
-    font-family: 'Open Sans';
-    --text-primary: #b6b6b6;
-    --text-secondary: #ececec;
-    --bg-primary: #23232e;
-    --bg-secondary: #141418;
-    --transition-speed: 500ms;
-    
-  }
-
-  
-body::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-body::-webkit-scrollbar-track {
-  background: #1e1e24;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: #50b325;
-}
-
 body {
-  background-color: whitesmoke;
-  font-family: 'Open Sans';
+  font-family:Arial, Helvetica, sans-serif;
   margin: 0;
 }
+
 * {
   box-sizing: border-box;
 }
+
 img {
   vertical-align: middle;
 }
+
 /* Position the image container (needed to position the left and right arrows) */
 .container {
   position: relative;
 }
+
 /* Hide the images by default */
 .mySlides {
   display: none;
 }
+
 /* Add a pointer when hovering over the thumbnail images */
 .cursor {
   cursor: pointer;
 }
+
 /* Next & previous buttons */
 .prev,
 .next {
@@ -71,18 +45,20 @@ img {
   border-radius: 0 3px 3px 0;
   user-select: none;
   -webkit-user-select: none;
-  background-color: rgba(73, 69, 69, 0.822);
 }
+
 /* Position the "next button" to the right */
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
+
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
 /* Number text (1/3 etc) */
 .numbertext {
   color: #f2f2f2;
@@ -91,6 +67,7 @@ img {
   position: absolute;
   top: 0;
 }
+
 /* Container for image text */
 .caption-container {
   text-align: center;
@@ -98,20 +75,24 @@ img {
   padding: 2px 16px;
   color: white;
 }
+
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
+
 /* Six columns side by side */
 .column {
   float: left;
   width: 16.66%;
 }
+
 /* Add a transparency effect for thumnbail images */
 .demo {
   opacity: 0.6;
 }
+
 .active,
 .demo:hover {
   opacity: 1;
@@ -194,106 +175,27 @@ img {
 /* end */
 
 
-/* end */
-
-/*mobile view*/
-@media only screen and (max-width: 600px) {
-  /* Button used to open the chat form - fixed at the bottom of the page */
-.open-button {
-  background-color: #555;
-  color: white;
-
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
-  position: fixed;
-  bottom: 15px;
-  right: 18px;
-  width: 200px;
-}
-
-/* The popup chat - hidden by default */
-.chat-popup {
-  display: none;
-  position: fixed;
-  
-  bottom: 0;
-  right: 0px;
-  border: 1px solid #f1f1f1;
-  z-index: 9;
-}
-
-/* Add styles to the form container */
-.form-container {
-  max-width: 220px;
-  padding: 4px;
-  background-color: white;
-}
-
-/* Full-width textarea */
-.form-container textarea {
-  width: 200px;
-  padding: 15px;
-  margin: 0px 0px 0px 0px;
-
-  border: none;
-  background: #f1f1f1;
-  resize: none;
-  min-height: 50px;
-}
-
-/* When the textarea gets focus, do something */
-.form-container textarea:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/send button */
-.form-container .btn {
-  margin-left: 0px;
-  margin-right: 0px;
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  width: 200px;
-  /* margin-bottom:10px; */
-  opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: #ce162e;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
-/*mobile view end*/
 </style>
 <body>
 
-<h2 style="text-align:center">Students View</h2>
+<h2 style="text-align:center">Record class </h2>
 <p id="session_id" style="display: none;"><%=data._id%></p>
 
 <div class="container">
-    <%if(data.pptimages.length>1){%>
-        <%data.pptimages.forEach(function(image){%>
-          <div class="mySlides">
-            <div class="numbertext">1 / 6</div>
-            <img src="/<%=image%>" style="width:100%">
-          </div>
-        <%});%>
-      <%}else{%>
-        <div class="mySlides">
-          <div class="numbertext">1 / 6</div>
-          <img src="/<%=data.pptimages%>" style="width:100%">
-        </div>
-      <%}%>
-    
+  <%if(data.pptimages.length>1){%>
+    <%data.pptimages.forEach(function(image){%>
+      <div class="mySlides">
+        <div class="numbertext">1 / 6</div>
+        <img src="/<%=image%>" style="width:100%">
+      </div>
+    <%});%>
+  <%}else{%>
+    <div class="mySlides">
+      <div class="numbertext">1 / 6</div>
+      <img src="/<%=data.pptimages%>" style="width:100%">
+    </div>
+  <%}%>
+ 
   <a class="prev" onclick="plusSlides(-1)">❮</a>
   <a class="next" onclick="plusSlides(1)">❯</a>
 
@@ -303,21 +205,26 @@ img {
 
   <div class="row">
     <%if(data.pptimages.length>1){%>
-        <% var i=1;%>
-        <%data.pptimages.forEach(function(image){%>
-          <div class="column">
-            <img class="demo cursor" src="/<%=image%>" style="width:100%" onclick="currentSlide(`<%=i%>`)" alt="Small Image">
-          <%++i%>
-          </div>
-        <%});%>
-      <%}else{%>
-        
+      <% var i=1;%>
+      <%data.pptimages.forEach(function(image){%>
         <div class="column">
-          <img class="demo cursor" src="/<%=data.pptimages%>" style="width:100%" onclick="currentSlide(1)" alt="Small Image">
+          <img class="demo cursor" src="/<%=image%>" style="width:100%" onclick="currentSlide(`<%=i%>`)" alt="Small Image">
+        <%++i%>
         </div>
-      <%}%>
+      <%});%>
+    <%}else{%>
       
+      <div class="column">
+        <img class="demo cursor" src="/<%=data.pptimages%>" style="width:100%" onclick="currentSlide(1)" alt="Small Image">
+      </div>
+    <%}%>
+    
   </div>
+<div>
+ <form action="/session/<%=data._id%>/teacher" style="padding: 20px 60px;" method="post">
+    <button type="submit" style="padding: 10px 15px;font-size: 1rem;border:3px solid #171717;border-radius: 15px;background-color: #ce162e;color: #e9e9e9; text-decoration: none;text-shadow: 2px 2px #36272782;margin: 1rem;">Terminate Session</button>
+  </form>
+</div>
 <!-- start  -->
 
 <button class="open-button" onclick="openForm()">Chat</button>
@@ -342,19 +249,22 @@ img {
 
 <script>
 const room = document.getElementById("session_id").innerText;
+
 const socket=io();
+
 socket.emit("joinRoom",{room});
-socket.on('changeslide',n =>{
-  currentSlide(n);
-})
+
 var slideIndex = 1;
 showSlides(slideIndex);
+
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
+
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
+
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
@@ -371,6 +281,8 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
   captionText.innerHTML = dots[slideIndex-1].alt;
+
+  socket.emit("currentslide",n);
 }
 </script>
 
