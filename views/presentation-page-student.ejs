@@ -190,7 +190,42 @@ img {
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
-
+#slideDisp{
+  display: none;
+}
+.forminput{
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+} 
+.form-btn{
+  width: 100%;
+background-color: #50b325;
+color: black;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+.form-btn:hover{
+background-color: #40732a;
+}
+#firstscreen{
+ border: 5px solid #b6b6b6;
+border-radius: 5px;
+background-color: #23232e;
+width: 100%;
+margin-top: 3rem;
+padding: 1rem;
+}
+#screen1{
+  display: blockS;
+}
 /* end */
 
 
@@ -280,7 +315,21 @@ img {
 <h2 style="text-align:center">Students View</h2>
 <p id="session_id" style="display: none;"><%=data._id%></p>
 
-<div class="container">
+
+<div id="screen1" style="width: 100%;padding: 2rem 10%;">
+<div id="firstscreen" >
+  <form id="nameform" style="padding: 25px;font-size: 2rem;color: #b6b6b6;">
+    <label>Enter your Name</label>
+    <input id="username" class ="forminput" placeholder="Enter your name here" required> 
+    <br>
+    <!-- <button  class="form-btn"  onclick="Userfn()" value="Start" >Start</button> -->
+  </form>
+  <button  class="form-btn"  onclick="Userfn()" value="Start" >next</button>
+</div>
+</div>
+
+
+<div class="container" id="slideDisp">
     <%if(data.pptimages.length>1){%>
         <%data.pptimages.forEach(function(image){%>
           <div class="mySlides">
@@ -342,38 +391,38 @@ img {
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
-const room = document.getElementById("session_id").innerText;
-const socket=io();
-socket.emit("joinRoom",{room});
-socket.on('changeslide',n =>{
-  currentSlide(n);
-})
-var slideIndex = 1;
-showSlides(slideIndex);
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  var captionText = document.getElementById("caption");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+  const room = document.getElementById("session_id").innerText;
+  const socket=io();
+  socket.emit("joinRoom",{room});
+  socket.on('changeslide',n =>{
+    currentSlide(n);
+  })
+  var slideIndex = 1;
+  showSlides(slideIndex);
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
   }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
   }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  captionText.innerHTML = dots[slideIndex-1].alt;
-}
-</script>
+  function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("demo");
+    var captionText = document.getElementById("caption");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+    captionText.innerHTML = dots[slideIndex-1].alt;
+  }
+  </script>
 
 <script>
   function openForm() {
@@ -384,6 +433,20 @@ function showSlides(n) {
     document.getElementById("myForm").style.display = "none";
   }
   </script>
-    
+    <script>
+      var  username = document.getElementById('username');
+      
+
+      function Userfn(){
+        username = document.getElementById('username');
+        if(username.value==""){
+          username.value="ghost";
+        }
+        console.log(username.value)
+        document.getElementById("screen1").style.display = "none";
+        document.getElementById("slideDisp").style.display = "block";
+
+      }
+ </script>
 </body>
 </html>
