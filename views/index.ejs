@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
+    rel="stylesheet"
+  />
 <style>
 
+:root {
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --transition-speed: 500ms;
+  
+}
 
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #50b325;
+}
 
 .container {
   display: grid;
@@ -20,32 +46,33 @@
 
 .item{
   height: 80px;
-  /* background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%); */
+  background-color: #23232e;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  color: rgb(14, 11, 11);
+  color: var(--text-primary);
   border-radius: 4px;
-  border: 5px solid #171717;
+  border: 5px solid #b6b6b6;
   display: grid;
   text-decoration: none;
   text-align: center;
   padding: 30px;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 
 .heading{
-  border-top: 2px solid white;
-    border-bottom:2px solid azure;
-    color: white;
+  border-top: 0.005rem solid #141418;
+    border-bottom:0.005rem solid #141418 ;
+  
 margin: 10px;
-font: 4em sans-serif;
+font-size: 8rem;
 padding: 20px;
 
 }
 
 
 .item:hover {
-    background-image: #008adb;
+    background-color: var(--bg-secondary);
+    color: #50b325;
   }
   
   
@@ -63,7 +90,7 @@ padding: 20px;
 }
 .item{
  
-  /* background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%); */
+  
   height: 300px;
   padding-top: 2rem;;
 }
@@ -71,18 +98,17 @@ padding: 20px;
   }
 </style>
 </head>
-<body style="background-color: #3b404e;">
+<body style="background-color: whitesmoke;">
 
 
-<h1 class="heading" style="text-align: center;">Simplylearn</h1>
+<h1 class="heading" style="text-align: center; color: #23232e;">Simplylearn</h1>
 <br>
-<div style="border-bottom: 2px solid azure; padding: 0.5px; margin: 20px; "></div>
-<br>
+
 <div class="container">
-  <a href="/teacher" class="item item1" style="background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%)">TEACHER</a>
-  <a href="/student" class="item item2" style="background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%)">STUDENT</a>
-  <a href="/info" class="item item3" style=" background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%)">INFORMATION</a>
-  <a href="" class="item item4" style="background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%)">DONATION</a>
+  <a href="/teacher" class="item item1" >TEACHER</a>
+  <a href="/student" class="item item2" >STUDENT</a>
+  <a href="/info" class="item item3" >INFORMATION</a>
+  <a href="" class="item item4" >DONATION</a>
 </div>
 
 </body>
