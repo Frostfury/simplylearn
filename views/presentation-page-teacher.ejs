@@ -220,7 +220,11 @@ img {
     <%}%>
     
   </div>
-
+<div>
+ <form action="/session/<%=data._id%>/teacher" style="padding: 20px 60px;" method="post">
+    <button type="submit" style="padding: 10px 15px;font-size: 1rem;border:3px solid #171717;border-radius: 15px;background-color: #ce162e;color: #e9e9e9; text-decoration: none;text-shadow: 2px 2px #36272782;margin: 1rem;">Terminate Session</button>
+  </form>
+</div>
 <!-- start  -->
 
 <button class="open-button" onclick="openForm()">Chat</button>
