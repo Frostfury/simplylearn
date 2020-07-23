@@ -191,6 +191,87 @@ img {
 }
 
 /* end */
+
+
+/* end */
+
+/*mobile view*/
+@media only screen and (max-width: 600px) {
+  /* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 15px;
+  right: 18px;
+  width: 200px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  
+  bottom: 0;
+  right: 0px;
+  border: 1px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 220px;
+  padding: 4px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 200px;
+  padding: 15px;
+  margin: 0px 0px 0px 0px;
+
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 50px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  /* margin-bottom:10px; */
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: #ce162e;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+/*mobile view end*/
 </style>
 <body>
 
