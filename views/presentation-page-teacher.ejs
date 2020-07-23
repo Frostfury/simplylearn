@@ -1,9 +1,42 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+     
+<link
+href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
+rel="stylesheet"
+/>
+</head>
 <style>
+  :root {
+    font-size: 16px;
+    font-family: 'Open Sans';
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+    --transition-speed: 500ms;
+    
+  }
+
+  
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #50b325;
+}
+
+
 body {
-  font-family:Arial, Helvetica, sans-serif;
+  background-color: whitesmoke;
+  font-family: 'Open Sans';
   margin: 0;
 }
 
@@ -164,7 +197,7 @@ img {
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-  background-color: red;
+  background-color: #ce162e;
 }
 
 /* Add some hover effects to buttons */
@@ -222,7 +255,7 @@ img {
   </div>
 <div>
  <form action="/session/<%=data._id%>/teacher" style="padding: 20px 60px;" method="post">
-    <button type="submit" style="padding: 10px 15px;font-size: 1rem;border:3px solid #171717;border-radius: 15px;background-color: #ce162e;color: #e9e9e9; text-decoration: none;text-shadow: 2px 2px #36272782;margin: 1rem;">Terminate Session</button>
+    <button type="submit" style="padding: 10px 15px;font-size: 1rem;border:3px solid #23232e;border-radius: 5px;background-color: #ce162e;color: #e9e9e9; text-decoration: none;margin: 1rem;">Terminate Session</button>
   </form>
 </div>
 <!-- start  -->

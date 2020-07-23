@@ -10,8 +10,8 @@ input[type=text], select {
   
   input[type=start] {
     width: 100%;
-    background-color: #1EAAFC;
-    color: white;
+    background-color: #50b325;
+    color: black;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -20,13 +20,13 @@ input[type=text], select {
   }
   
   input[type=start]:hover {
-    background-color: #008adb;
+    background-color: #40732a;
   }
 
   input[type=submit] {
     width: 100%;
-    background-color: #1EAAFC;
-    color: white;
+    background-color: #50b325;
+    color: black;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -35,13 +35,13 @@ input[type=text], select {
   }
   
   input[type=submit]:hover {
-    background-color: #008adb;
+    background-color: #40732a;
   }
   
   input[type=file] {
    
-    background-color: #1EAAFC;
-    color: white;
+    background-color: #50b325;
+    color: black;
     padding: 7px 14px;
     margin: 8px 0;
     border: none;
@@ -50,12 +50,13 @@ input[type=text], select {
   }
   
   input[type=file]:hover {
-    background-color: #008adb;
+    background-color: #40732a;
   }
   
   
   div {
+    color: #b6b6b6;
     border-radius: 5px;
-    background-color: #f2f2f2;
+    background-color: #23232e;
     padding: 20px;
   }
