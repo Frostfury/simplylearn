@@ -5,6 +5,7 @@ var express                                 =   require('express'),
     bodyParser                              =   require("body-parser"),
     multer                                  =   require("multer"),
     mongoose                                =   require("mongoose"),
+    formatMessage                           =   require("./utils/messages"),
     moment                                  =   require("moment"),
     path                                    =   require('path'),
     fs                                      =   require('fs-extra'),
@@ -151,8 +152,9 @@ app.post("/session/:id/teacher",function(req,res){
 })
 
 io.on('connection',function(socket){
-    socket.on('joinRoom',({room})=>{
-        const user = userJoin(socket.id, room);
+    socket.on('joinRoom',({username,room})=>{
+        console.log(username);
+        const user = userJoin(socket.id,username, room);
         socket.join(user.room);
       })
 
@@ -168,6 +170,10 @@ io.on('connection',function(socket){
 
       })
 
+      socket.on('chatMessage', msg =>{
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit('message', formatMessage(user.username,msg));
+      });
 
     socket.on('disconnect',()=>{
         userLeave(socket.id);

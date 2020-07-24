@@ -303,6 +303,7 @@ img {
 
 <h2 style="text-align:center">Teachers View</h2>
 <p id="session_id" style="display: none;"><%=data._id%></p>
+<p id="username" style="display: none;"><%=data.name%></p>
 
 <div class="container">
   <%if(data.pptimages.length>1){%>
@@ -353,7 +354,7 @@ img {
 <button class="open-button" onclick="openForm()">Chat</button>
 
 <div class="chat-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
+  <form action="" id="chatForm" class="form-container">
     
     <h1>Chat</h1>
     <div id="txtmsg">
@@ -362,7 +363,7 @@ img {
     <label for="msg" ><b>Message</b></label>
     <textarea placeholder="Type message.." name="msg" required></textarea>
 
-    <button type="submit" class="btn" disabled>Send</button>
+    <button type="submit" class="btn" >Send</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
@@ -375,10 +376,12 @@ img {
 
 <script>
 const room = document.getElementById("session_id").innerText;
+var  username = document.getElementById('username').innerText;
+
 
 const socket=io();
 
-socket.emit("joinRoom",{room});
+socket.emit("joinRoom",{username,room});
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -410,9 +413,7 @@ function showSlides(n) {
 
   socket.emit("currentslide",n);
 }
-</script>
 
-<script>
   function openForm() {
     document.getElementById("myForm").style.display = "block";
   }
@@ -420,8 +421,7 @@ function showSlides(n) {
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
   }
-  </script>
-  <script>
+  
     socket.on('newUser',newuser =>{
       openForm();
       console.log(newuser);
@@ -432,6 +432,30 @@ function showSlides(n) {
       console.log(newuser);
       document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : red">'+newuser+'</h3>'+ 'disconected');
     })
+
+    const chatForm = document.getElementById("chatForm");
+    chatForm.addEventListener('submit', (e) =>{
+      e.preventDefault();
+  
+      const msg = e.target.elements.message.value;
+      console.log(msg);
+      socket.emit('chatMessage', msg);
+      e.target.elements.message.value="";
+      e.target.elements.message.focus();
+  });
+
+  socket.on('message', message =>{
+    outputMessage(message);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+function outputMessage(message){
+  console.log("working");
+    const div = document.createElement('div');
+    div.classList.add('messages');
+    div.innerHTML = `  <p class="lead">${message.username} <span>${message.time}</span>:${message.text} </p>`;
+    document.querySelector('#txtmsg').appendChild(div);
+}
   </script>
     
 </body>
