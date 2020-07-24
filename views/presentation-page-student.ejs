@@ -437,16 +437,17 @@ padding: 1rem;
       var user;
 
       function Userfn(){
-        username = document.getElementById('username');
+        username = document.getElementById('username').value;
 
-        if(username.value==""){
-          username.value="ghost";
+        if(username==""){
+          username="ghost";
         }
+        user= username;
+        console.log(user);
+        socket.emit("joinRoom",{username,room});
         document.getElementById("screen1").style.display = "none";
         document.getElementById("slideDisp").style.display = "block";
-        const user= username.value;
-        console.log(user.toString());
-        socket.emit("joinRoom",{user,room});
+
 
       }
 
