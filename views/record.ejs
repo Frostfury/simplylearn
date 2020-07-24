@@ -1,11 +1,189 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+     
+<link
+href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
+rel="stylesheet"
+/>
+</head>
 <style>
-body {
-  font-family:Arial, Helvetica, sans-serif;
-  margin: 0;
+  :root {
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --transition-speed: 500ms;
+  
 }
+
+body {
+  color: black;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #51cf1b;
+}
+
+main {
+  margin-left: 5rem;
+  padding: 1rem;
+}
+
+.navbar {
+  position: fixed;
+  background-color: var(--bg-primary);
+  transition: width 500ms ease;
+ 
+}
+
+.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+}
+
+.nav-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+ 
+}
+
+.link-text {
+  display: none;
+  margin-left: 1rem;
+}
+
+.nav-link img {
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+}
+
+.logo {
+  font-weight: bold;
+  
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  font-size: 1.5rem;
+  letter-spacing: 0.3ch;
+  width: 100%;
+}
+
+.logo img {
+  transform: rotate(0deg);
+  transition: var(--transition-speed);
+}
+
+.logo-text
+{
+  display: inline;
+  position: absolute;
+  left: -999px;
+  transition: var(--transition-speed);
+}
+
+.navbar:hover .logo img {
+  transform: rotate(-180deg);
+}
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+  .navbar {
+    bottom: 0;
+    width: 100vw;
+    height: 5rem;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .nav-link {
+    justify-content: center;
+  }
+
+  main {
+    margin: 0;
+  }
+  .container{
+    margin-left: 0rem;
+  }
+}
+
+/* Large screens */
+@media only screen and (min-width: 600px) {
+  .navbar {
+    z-index: 8;
+    top: 0;
+    width: 5rem;
+    height: 100vh;
+  }
+  .container{
+    margin-left: 5rem;
+   /*put z index here*/
+  }
+
+  .navbar:hover {
+    width: 18rem;
+  }
+
+  .navbar:hover .link-text {
+    display: inline;
+  }
+
+  .navbar:hover .logo img
+  {
+    margin-left: 13rem;
+  }
+
+  .navbar:hover .logo-text
+  {
+    left: 0px;
+  }
+}
+
 
 * {
   box-sizing: border-box;
@@ -17,6 +195,7 @@ img {
 
 /* Position the image container (needed to position the left and right arrows) */
 .container {
+   
   position: relative;
 }
 
@@ -45,6 +224,7 @@ img {
   border-radius: 0 3px 3px 0;
   user-select: none;
   -webkit-user-select: none;
+  background-color: rgba(73, 69, 69, 0.822);
 }
 
 /* Position the "next button" to the right */
@@ -128,6 +308,7 @@ img {
 
 /* Add styles to the form container */
 .form-container {
+  font-size: 0.5rem;
   max-width: 300px;
   padding: 10px;
   background-color: white;
@@ -164,7 +345,7 @@ img {
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-  background-color: red;
+  background-color: #ce162e;
 }
 
 /* Add some hover effects to buttons */
@@ -172,14 +353,137 @@ img {
   opacity: 1;
 }
 
+.terminate-btn{
+  padding: 10px 15px;font-size: 1rem;border:3px solid #23232e ;border-radius: 5px;background-color: #ce162e;color: #e9e9e9; text-decoration: none;margin: 1rem;
+
+}
+
+.terminate-btn:hover{
+  background-color: #ac031a;
+}
+
 /* end */
+
+/*mobile view*/
+@media only screen and (max-width: 600px) {
+  /* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 15px;
+  right: 18px;
+  width: 200px;
+}
+
+.container{
+  margin-left: 0rem;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  
+  bottom: 0;
+  right: 0px;
+  border: 1px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 220px;
+  padding: 4px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 200px;
+  padding: 15px;
+  margin: 0px 0px 0px 0px;
+
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 50px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  /* margin-bottom:10px; */
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: #ce162e;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+}
+/*mobile view end*/
 
 
 </style>
 <body>
 
-<h2 style="text-align:center">Record class </h2>
+
+    <nav class="navbar">
+        <ul class="navbar-nav">
+          <li class="logo">
+            <a href="#" class="nav-link">
+              <span class="link-text logo-text">Simplylearn</span>
+              <img src="next.svg" alt="teacher" width="50" height="50" style="filter: invert(82%) sepia(18%) saturate(7486%) hue-rotate(53deg) brightness(94%) contrast(89%);">
+    
+            
+            </a>
+          </li>
+    
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+                  <img src="play.svg" alt="teacher" width="50" height="50" style="filter: invert(82%) sepia(18%) saturate(7486%) hue-rotate(53deg) brightness(94%) contrast(89%);">
+              <span class="link-text">START</span>
+            </a>
+          </li>
+    
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+                    <img src="stop.svg" alt="student" width="50" height="50" style="filter: invert(82%) sepia(18%) saturate(7486%) hue-rotate(53deg) brightness(94%) contrast(89%);">
+              <span class="link-text">STOP</span>
+            </a>
+          </li>
+    
+          
+        </ul>
+      </nav>
+
+<h2 style="text-align:center">Teachers View</h2>
 <p id="session_id" style="display: none;"><%=data._id%></p>
+<p id="username" style="display: none;"><%=data.name%></p>
 
 <div class="container">
   <%if(data.pptimages.length>1){%>
@@ -222,7 +526,7 @@ img {
   </div>
 <div>
  <form action="/session/<%=data._id%>/teacher" style="padding: 20px 60px;" method="post">
-    <button type="submit" style="padding: 10px 15px;font-size: 1rem;border:3px solid #171717;border-radius: 15px;background-color: #ce162e;color: #e9e9e9; text-decoration: none;text-shadow: 2px 2px #36272782;margin: 1rem;">Terminate Session</button>
+    <button type="submit" class="terminate-btn" >Terminate Session</button>
   </form>
 </div>
 <!-- start  -->
@@ -230,13 +534,16 @@ img {
 <button class="open-button" onclick="openForm()">Chat</button>
 
 <div class="chat-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
+  <form action="" id="chatForm" class="form-container">
+    
     <h1>Chat</h1>
+    <div id="txtmsg">
+  </div>
 
-    <label for="msg"><b>Message</b></label>
+    <label for="msg" ><b>Message</b></label>
     <textarea placeholder="Type message.." name="msg" required></textarea>
 
-    <button type="submit" class="btn">Send</button>
+    <button type="submit" class="btn" >Send</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
@@ -249,10 +556,12 @@ img {
 
 <script>
 const room = document.getElementById("session_id").innerText;
+var  username = document.getElementById('username').innerText;
+
 
 const socket=io();
 
-socket.emit("joinRoom",{room});
+socket.emit("joinRoom",{username,room});
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -284,9 +593,7 @@ function showSlides(n) {
 
   socket.emit("currentslide",n);
 }
-</script>
 
-<script>
   function openForm() {
     document.getElementById("myForm").style.display = "block";
   }
@@ -294,6 +601,41 @@ function showSlides(n) {
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
   }
+  
+    socket.on('newUser',newuser =>{
+      openForm();
+      console.log(newuser);
+      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
+    })
+    socket.on('deadUser',newuser =>{
+      openForm();
+      console.log(newuser);
+      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : red">'+newuser+'</h3>'+ 'disconected');
+    })
+
+    const chatForm = document.getElementById("chatForm");
+    chatForm.addEventListener('submit', (e) =>{
+      e.preventDefault();
+  
+      const msg = e.target.elements.message.value;
+      console.log(msg);
+      socket.emit('chatMessage', msg);
+      e.target.elements.message.value="";
+      e.target.elements.message.focus();
+  });
+
+  socket.on('message', message =>{
+    outputMessage(message);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+function outputMessage(message){
+  console.log("working");
+    const div = document.createElement('div');
+    div.classList.add('messages');
+    div.innerHTML = `  <p class="lead">${message.username} <span>${message.time}</span>:${message.text} </p>`;
+    document.querySelector('#txtmsg').appendChild(div);
+}
   </script>
     
 </body>
