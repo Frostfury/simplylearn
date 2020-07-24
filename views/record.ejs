@@ -448,6 +448,22 @@ img {
 /*mobile view end*/
 
 
+.arrow {
+    /* box-sizing: border-box; */
+    height: 24px;
+    width: 24px;
+    border-style: solid;
+    border-color: green;
+    border-width: 0px 0px 1px 1px;
+    transform: rotate(225deg);
+    margin: 0 1.5rem;
+    /* transition: border-width 150ms ease-in-out; */
+  }
+  
+
+
+
+
 </style>
 <body>
 
@@ -457,22 +473,27 @@ img {
           <li class="logo">
             <a href="#" class="nav-link">
               <span class="link-text logo-text">Simplylearn</span>
-              <img src="next.svg" alt="teacher" width="50" height="50" style="filter: invert(82%) sepia(18%) saturate(7486%) hue-rotate(53deg) brightness(94%) contrast(89%);">
-    
+              <figure class="arrow">
+
+              </figure>    
             
             </a>
           </li>
     
           <li class="nav-item">
             <a href="#" class="nav-link">
-                  <img src="play.svg" alt="teacher" width="50" height="50" style="filter: invert(82%) sepia(18%) saturate(7486%) hue-rotate(53deg) brightness(94%) contrast(89%);">
+              <figure style="width: 0; height: 0; border-style: solid; border-width: 12px 0px 12px 20.8px; border-color: transparent transparent transparent green;margin: 0 1.5rem">
+            
+              </figure>
               <span class="link-text">START</span>
             </a>
           </li>
     
           <li class="nav-item">
             <a href="#" class="nav-link">
-                    <img src="stop.svg" alt="student" width="50" height="50" style="filter: invert(82%) sepia(18%) saturate(7486%) hue-rotate(53deg) brightness(94%) contrast(89%);">
+              <figure class= "stop" style=" width: 24px; height: 24px;   background-color:green; margin: 0 1.5rem">
+
+              </figure>
               <span class="link-text">STOP</span>
             </a>
           </li>
