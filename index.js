@@ -110,6 +110,19 @@ app.get("/session/:id/teacher",function(req,res){
     });
 });
 
+app.get("/session/:id/recordteacher",function(req,res){
+    teacherSchema.findById(req.params.id,function(err,data){
+        if(err){
+            console.log(err);
+            res.redirect("/teacher");
+        }
+        else{
+            res.render("record",{data:data});
+        }
+    });
+});
+
+
 app.get("/session/:id",function(req,res){
     teacherSchema.findById(req.params.id,function(err,data){
         if(err){
