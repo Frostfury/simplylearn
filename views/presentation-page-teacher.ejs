@@ -354,12 +354,15 @@ img {
 
 <div class="chat-popup" id="myForm">
   <form action="/action_page.php" class="form-container">
+    
     <h1>Chat</h1>
+    <div id="txtmsg">
+  </div>
 
-    <label for="msg"><b>Message</b></label>
+    <label for="msg" ><b>Message</b></label>
     <textarea placeholder="Type message.." name="msg" required></textarea>
 
-    <button type="submit" class="btn">Send</button>
+    <button type="submit" class="btn" disabled>Send</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
@@ -417,6 +420,18 @@ function showSlides(n) {
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
   }
+  </script>
+  <script>
+    socket.on('newUser',newuser =>{
+      openForm();
+      console.log(newuser);
+      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
+    })
+    socket.on('deadUser',newuser =>{
+      openForm();
+      console.log(newuser);
+      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : red">'+newuser+'</h3>'+ 'disconected');
+    })
   </script>
     
 </body>

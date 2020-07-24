@@ -161,6 +161,13 @@ io.on('connection',function(socket){
         io.to(user.room).emit('changeslide',n);
 
       })
+      socket.on('userLive',username =>{
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit('newUser',username);
+        socket.username=username;
+
+      })
+
 
     socket.on('disconnect',()=>{
         userLeave(socket.id);
