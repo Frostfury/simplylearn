@@ -166,9 +166,9 @@ app.post("/session/:id/teacher",function(req,res){
 
 io.on('connection',function(socket){
     socket.on('joinRoom',({username,room})=>{
-        console.log(username);
         const user = userJoin(socket.id,username, room);
         socket.join(user.room);
+        io.to(user.room).emit('newUser',username);
       })
 
       socket.on('currentslide',n =>{
@@ -176,12 +176,11 @@ io.on('connection',function(socket){
         io.to(user.room).emit('changeslide',n);
 
       })
-      socket.on('userLive',username =>{
-        const user = getCurrentUser(socket.id);
-        io.to(user.room).emit('newUser',username);
-        socket.username=username;
+    //   socket.on('userLive',username =>{
+    //     const user = getCurrentUser(socket.id);
+    //     socket.username=username;
 
-      })
+    //   })
 
       socket.on('chatMessage', msg =>{
         const user = getCurrentUser(socket.id);
