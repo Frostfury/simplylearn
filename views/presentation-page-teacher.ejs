@@ -162,7 +162,7 @@ img {
 
 /* Add styles to the form container */
 .form-container {
-  font-size: 0.5rem;
+  /* font-size: 0.5rem; */
   max-width: 300px;
   padding: 10px;
   background-color: white;
@@ -357,11 +357,11 @@ img {
   <form action="" id="chatForm" class="form-container">
     
     <h1>Chat</h1>
-    <div id="txtmsg">
+    <div id="txtmsg" style="height: 7rem; overflow:auto;">
   </div>
 
     <label for="msg" ><b>Message</b></label>
-    <textarea placeholder="Type message.." id="message" name="msg" required></textarea>
+    <textarea placeholder="Type message.." id="message" name="msg" style="height: 2rem;"></textarea>
 
     <button type="submit" class="btn" >Send</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
@@ -424,11 +424,11 @@ function showSlides(n) {
   
     socket.on('newUser',newuser =>{
       openForm();
-      console.log(newuser);
-      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
-    });
-    socket.on('userList',userList =>{
-      console.log(userList);
+      // document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
+    const div = document.createElement('div');
+    div.classList.add('messages');
+    div.innerHTML = `  <p class="lead" ><span style="color : green">${newuser} </span >joined </p>`;
+    document.querySelector('#txtmsg').appendChild(div);
     })
 
     socket.on('deadUser',newuser =>{
@@ -438,6 +438,8 @@ function showSlides(n) {
     })
 
     const chatForm = document.getElementById("chatForm");
+    const chatMessages = document.getElementById("txtmsg") ;
+
     chatForm.addEventListener('submit', (e) =>{
       e.preventDefault();
   
