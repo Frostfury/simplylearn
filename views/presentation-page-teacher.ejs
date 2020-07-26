@@ -461,6 +461,17 @@ function outputMessage(message){
     document.querySelector('#txtmsg').appendChild(div);
 }
   </script>
+  <script>
+    document.onkeydown = function (e) {
+    switch (e.key) {
+        case 'ArrowLeft':
+          plusSlides(-1)
+            break;
+        case 'ArrowRight':
+           plusSlides(1);
+    }
+};
+  </script>
     
 </body>
 </html>
