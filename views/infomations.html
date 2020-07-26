@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
+  rel="stylesheet"
+/>
+<style>
+
+
+:root {
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --transition-speed: 500ms;
+  
+}
+
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #50b325;
+}
+
+.container {
+  
+  width:100%;
+  
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 150px);
+ 
+
+  justify-content: center;
+  align-items: center;
+}
+
+.item{
+  
+  background-color: #23232e;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  color: var(--text-primary);  border-radius: 4px;
+  border: 5px solid #b6b6b6;
+  display: grid;
+  text-decoration: none;
+  text-align: center;
+  padding: 30px;
+  font-size:2rem;
+  margin: 2rem;
+}
+
+
+.heading{
+    border-top: 2px solid #141418;
+    border-bottom:2px solid #141418;
+    /* color: white; */
+margin: 10px;
+font: 4em sans-serif;
+padding: 20px;
+
+}
+
+
+.item:hover {
+    background-image: #50b325;
+  }
+  
+  
+  @media only screen and (max-width: 1200px) {
+    .container {
+  
+  width:100%;
+  
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 367px);
+  
+  justify-content: center;
+  align-items: center;
+}
+
+
+  }
+  
+i{
+  color: #50b325;
+}
+</style>
+</head>
+<body style="background-color: whitesmoke;">
+
+
+<h1 class="heading" style="text-align: center; color: #23232e;">Simplylearn</h1>
+<br>
+
+<div class="container">
+  <div class="item item1" >
+     <h3>About</h3>
+     <p>Simplylearn is a learning platform that helps students from all over the world to study and interact with their instructors in a much efficient and easier way.
+       Simplylearn helps every students learn faster and efficient even with very low internet connectivity and internet data usage. This platform is open source as well as free to use.
+     </p>
+
+</div>
+  <div class="item item2" >
+    <h3>How to use?</h3>
+<p>
+  Firstly, the instructor should save his/her power-point presentations or pdf in png/jpeg fromat(jpeg format is recommended). The power-point or pdf must be saved as png/jpeg format in a folder in your device.
+  <br>
+  <i>
+    Tip : For saving the document in png/jpeg format, go to Files > Save As > Select file type as png/jpeg, and save it.
+  </i>
+</p>
+</div>
+  <div class="item item3" >
+    <!-- <h3>Student</h3> -->
+<p>
+  In this platform, the instructor should select the "teacher" button in order to proceed. After selection, you would recieve a form containing teacher name, Class name and an image upload button.
+  Fill in the form and upload the image folder that you created earlier. then press the submit button.
+  <br>
+  <i>
+    Tip : You can either upload the folder or select the images in the folder that you want to upload.
+  </i>
+</p>
+</div>
+  <div class="item item4" >
+    <!-- <h3>something</h3> -->
+    <p>
+      The next page shows you a box containing a student's link, and two buttons saying, "start session" and "record session". copy the link in the box by pressing on the copy button provided next to it,
+       and share it your students via other social media application like watsapp, gamil etc.
+       <br>
+       The "start session" button starts the class in a normal way, while "record session" button is used for class in which you could video record your whole session and keep a copy of your class.
+     </p>
+     <i>
+       Tip : The students link could also be copied using mouse by left clicking and dragging all over the link, and press Ctrl+c.
+     </i>
+</div>
+<div class="item item4" >
+  <h3>Start session</h3>
+  <p>
+    This session shows your power point slide-by-slide. You could either move to another slide using arrow keys provided on the page or by selecting thumbnails 
+    of all the slides, shown below the slide which is currently being presented, if you want to skip a part of your presentation.
+    Their is a navigation bar on the left side of your presentation, it shows the list of students attending your class. There is a
+    box that can be used to chat with the students, on the right bottom corner of the screen. Press on the "terminate session" button if you wanted to end your session.
+  </p>
+  <i>
+    Note : When instructor change the slides, it will automatically change the slides on students page. But vice versa wont happen.
+  </i>
+</div>
+<div class="item item4" >
+  <h3>Terminate session</h3>
+  <p>
+    Thi session is used for the purpose of video recording the session and later share it with your students or keep a copy of your class.
+    This session also shows your power point slide-by-slide. You could either move to another slide using arrow keys provided on the page or by selecting thumbnails 
+    of all the slides, shown below the slide which is currently being presented, if you want to skip a part of your presentation.
+    Their is a navigation bar on the left side of your presentation, it shows the list of students attending your class. There is a
+    box that can be used to chat with the students, on the right bottom corner of the screen. Press on the "terminate session" button if you wanted to end your session.
+  </p>
+  <i>
+    Note : When instructor change the slides, it will automatically change the slides on students page. But vice versa wont happen.
+  </i>
+</div>
+<div class="item item4" >
+    <h3>Contact us</h3>
+    <p>
+    Mail us @ kappiinnovations@gmail.com  
+    </p>
+    <i>
+      Note : When instructor change the slides, it will automatically change the slides on students page. But vice versa wont happen.
+    </i>
+  </div>
+</div>
+
+</body>
+</html>

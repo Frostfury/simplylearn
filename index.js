@@ -11,8 +11,8 @@ var express                                         =   require('express'),
     fs                                              =   require('fs-extra'),
     {userJoin,getCurrentUser,userLeave,getRoom}     =   require("./utils/users"),
     teacherSchema                                   =   require("./models/teacher");
-
-mongoose.connect("mongodb://localhost:27017/simplylearn", { useNewUrlParser: true });
+    mongoose.connect("mongodb+srv://KappiAdmin:Kappi@123@cluster0.myhwp.gcp.mongodb.net/teacher?retryWrites=true&w=majority", { useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost:27017/simplylearn", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);    
 
 var storage = multer.diskStorage({
