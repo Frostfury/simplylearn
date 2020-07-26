@@ -117,7 +117,7 @@ app.get("/session/:id/recordteacher",function(req,res){
             res.redirect("/teacher");
         }
         else{
-            res.render("record",{data:data});
+            res.render("working-on-this",{data:data});
         }
     });
 });
