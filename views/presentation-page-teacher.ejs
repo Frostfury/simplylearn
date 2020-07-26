@@ -426,7 +426,11 @@ function showSlides(n) {
       openForm();
       console.log(newuser);
       document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
+    });
+    socket.on('userList',userList =>{
+      console.log(userList);
     })
+
     socket.on('deadUser',newuser =>{
       openForm();
       console.log(newuser);

@@ -6,6 +6,10 @@ function userJoin(id,username, room){
     return user;
 }
 
+function getRoom(room){
+    return users.filter(user=>user.room === room);
+}
+
 function getCurrentUser(id){
     return users.find(user=>user.id === id);
 }
@@ -20,5 +24,6 @@ function userLeave(id){
 module.exports = {
     userJoin,
     getCurrentUser,
-    userLeave
+    userLeave,
+    getRoom
 };

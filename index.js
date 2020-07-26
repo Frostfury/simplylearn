@@ -1,16 +1,16 @@
-var express                                 =   require('express'),
-    app                                     =   express(),
-    http                                    =   require('http').Server(app),
-    io                                      =   require('socket.io')(http),
-    bodyParser                              =   require("body-parser"),
-    multer                                  =   require("multer"),
-    mongoose                                =   require("mongoose"),
-    formatMessage                           =   require("./utils/messages"),
-    moment                                  =   require("moment"),
-    path                                    =   require('path'),
-    fs                                      =   require('fs-extra'),
-    {userJoin,getCurrentUser,userLeave}     =   require("./utils/users"),
-    teacherSchema                           =   require("./models/teacher");
+var express                                         =   require('express'),
+    app                                             =   express(),
+    http                                            =   require('http').Server(app),
+    io                                              =   require('socket.io')(http),
+    bodyParser                                      =   require("body-parser"),
+    multer                                          =   require("multer"),
+    mongoose                                        =   require("mongoose"),
+    formatMessage                                   =   require("./utils/messages"),
+    moment                                          =   require("moment"),
+    path                                            =   require('path'),
+    fs                                              =   require('fs-extra'),
+    {userJoin,getCurrentUser,userLeave,getRoom}     =   require("./utils/users"),
+    teacherSchema                                   =   require("./models/teacher");
 
 mongoose.connect("mongodb://localhost:27017/simplylearn", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);    
@@ -168,7 +168,9 @@ io.on('connection',function(socket){
     socket.on('joinRoom',({username,room})=>{
         const user = userJoin(socket.id,username, room);
         socket.join(user.room);
+        var userList = getRoom(room);
         io.to(user.room).emit('newUser',username);
+        io.to(user.room).emit('userList',userList);
       })
 
       socket.on('currentslide',n =>{

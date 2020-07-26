@@ -456,6 +456,10 @@ padding: 1rem;
       document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
     })
 
+    socket.on('userList',userList =>{
+      console.log(userList);
+    })
+
   const chatForm = document.getElementById("chatForm");
   const chatMessages = document.getElementById("txtmsg") ;
   chatForm.addEventListener('submit', (e) =>{
