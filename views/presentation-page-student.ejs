@@ -375,12 +375,12 @@ padding: 1rem;
 <div class="chat-popup" id="myForm">
   <form action="" id="chatForm" class="form-container">
     <h1>Chat</h1>
-    <div id="txtmsg">
+    <div id="txtmsg" style="height: 7rem; overflow:auto;">
       
     </div>
 
     <label for="msg"><b>Message</b></label>
-    <textarea placeholder="Type message.." name="msg" id="message" required></textarea>
+    <textarea placeholder="Type message.." name="msg" id="message" style="height: 2rem"></textarea>
 
     <button  class="btn" >Send</button>
     <button  class="btn cancel" onclick="closeForm()">Close</button>
@@ -453,7 +453,11 @@ padding: 1rem;
 
     socket.on('newUser',newuser =>{
       openForm();
-      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
+      // document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
+    const div = document.createElement('div');
+    div.classList.add('messages');
+    div.innerHTML = `  <p class="lead" ><span style="color : green">${newuser} </span >joined </p>`;
+    document.querySelector('#txtmsg').appendChild(div);
     })
 
   const chatForm = document.getElementById("chatForm");
