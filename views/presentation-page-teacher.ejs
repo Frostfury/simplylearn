@@ -463,7 +463,7 @@ img {
 
   
   <nav class="navbar">
-    <ul class="navbar-nav">
+    <ul id="list" class="navbar-nav">
       <li class="logo">
         <a href="#" class="nav-link">
           <span class="link-text logo-text">Simplylearn</span>
@@ -474,7 +474,7 @@ img {
         </a>
       </li>
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="#" class="nav-link">
          
           <span class="link-text">Student 1</span>
@@ -486,7 +486,7 @@ img {
          
           <span class="link-text">Student 2</span>
         </a>
-      </li>
+      </li> -->
 
       
     </ul>
@@ -624,7 +624,18 @@ function showSlides(n) {
     })
 
     socket.on('userList',userList =>{
-      // console.log(userList);
+      if(userList){
+        openForm();
+      // userList.forEach(function(user){
+        let li = document.createElement("li");
+        li.classList.add('nav-item');
+        li.innerHTML = ` <a href="#" class="nav-link"><span class="link-text">${userList.username}</span></a>`
+        console.log(userList.username);
+        // document.getElementById("list").insertAdjacentHTML("afterend",'<li class="nav-item"><a href="#" class="nav-link"><span class="link-text">'+user.username+'</span></a></li>');
+        document.querySelector('#list').appendChild(li);
+
+      // })
+      }
     });
 
     socket.on('deadUser',newuser =>{
