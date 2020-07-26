@@ -190,7 +190,13 @@ io.on('connection',function(socket){
       });
 
     socket.on('disconnect',()=>{
+        const user = getCurrentUser(socket.id);
         userLeave(socket.id);
+        if(user){
+         var userList = getRoom(user.room);
+            io.to(user.room).emit('deadUser',user.username);
+            io.to(user.room).emit('userList',userList);
+        }
       });
 });
 

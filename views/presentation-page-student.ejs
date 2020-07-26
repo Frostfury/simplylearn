@@ -461,7 +461,13 @@ padding: 1rem;
     })
 
     socket.on('userList',userList =>{
-      console.log(userList);
+      // console.log(userList);
+    })
+
+    socket.on('deadUser',newuser =>{
+      openForm();
+      // console.log(newuser);
+      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : red">'+newuser+' disconected </h3>');
     })
 
   const chatForm = document.getElementById("chatForm");

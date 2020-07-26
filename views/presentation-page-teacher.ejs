@@ -431,10 +431,14 @@ function showSlides(n) {
     document.querySelector('#txtmsg').appendChild(div);
     })
 
+    socket.on('userList',userList =>{
+      // console.log(userList);
+    });
+
     socket.on('deadUser',newuser =>{
       openForm();
-      console.log(newuser);
-      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : red">'+newuser+'</h3>'+ 'disconected');
+      // console.log("disconnected",newuser);
+      document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : red">'+newuser+' disconected </h3>');
     })
 
     const chatForm = document.getElementById("chatForm");
