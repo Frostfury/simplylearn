@@ -142,29 +142,38 @@ main {
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
-    bottom: 0;
-    width: 100vw;
-    height: 5rem;
-  }
-
-  .logo {
-    display: none;
-  }
-
-  .navbar-nav {
-    flex-direction: row;
-  }
-
-  .nav-link {
-    justify-content: center;
-  }
-
-  main {
-    margin: 0;
+    z-index: 8;
+    top: 0;
+    width: 1.5rem;
+    height: 100%;
   }
   .container{
-    margin-left: 0rem;
+    margin-left: 1.5rem;
+   /*put z index here*/
   }
+
+  .navbar:hover {
+    width: 7rem;
+  }
+
+  .navbar:hover .link-text {
+    display: inline;
+    font-size: 0.5rem;
+  }
+
+ 
+  .navbar:hover .logo img
+  {
+    margin-left: 7rem;
+  
+  }
+
+  .navbar:hover .logo-text
+  {
+    left: 0px;
+  }
+
+  
 }
 
 /* Large screens */
@@ -455,6 +464,9 @@ img {
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+
+
 }
 /*mobile view end*/
 
@@ -471,6 +483,68 @@ img {
     /* transition: border-width 150ms ease-in-out; */
   }
 
+/*burger*/
+
+.burger-button {
+  position:fixed;
+  top: 2vh;
+  right: 2vh;
+  z-index: 9;
+  padding: 8px;
+  margin: 0.8rem 0.05rem;
+  
+}
+/*this is where you can chand the color of the buttons*/
+.burger-button span{
+  width: 40px;
+  border: 2px solid #4CAF50;
+  background-color: #4CAF50;
+  display: block;
+  border-radius: 22px;
+  transition: 0.5s;
+  
+}
+.burger-button.active span{
+  border-color: green;
+  background-color:#383;
+}
+
+.burger-top, .burger-bottom{
+  position: absolute;
+  
+}
+
+.burger-top{
+  top: -02px;
+}
+
+.burger-bottom{
+  bottom: -02px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .burger-button span{
+  width: 5px;
+  border: 1px solid #4CAF50;
+  background-color: #4CAF50;
+  display: block;
+  border-radius: 22px;
+  transition: 0.5s;
+  
+    }
+    
+.burger-button {
+  position:fixed;
+  top: 1rem;
+  right: 0.2rem;
+  z-index: 9;
+  padding: 6px;
+  margin: 0.8rem 0.05rem ;
+  
+}
+
+}
 </style>
 <body>
 
@@ -480,10 +554,12 @@ img {
     <ul id="list" class="navbar-nav">
       <li class="logo">
         <a href="#" class="nav-link">
-          <span class="link-text logo-text">Simplylearn</span>
-          <figure class="arrow">
-
-          </figure>    
+          <span class="link-text logo-text"></span>
+          <div class="burger-button">
+            <span class="burger-top"></span>
+            <span class="burger-middle"></span>
+            <span class="burger-bottom"></span>
+        </div>      
         
         </a>
       </li>
