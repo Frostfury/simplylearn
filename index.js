@@ -172,9 +172,9 @@ io.on('connection',function(socket){
     socket.on('joinRoom',({username,room})=>{
         const user = userJoin(socket.id,username, room);
         socket.join(user.room);
-        // var userList = getRoom(room);
+        var userList = getRoom(room);
         io.to(user.room).emit('newUser',username);
-        io.to(user.room).emit('userList',user);
+        io.to(user.room).emit('userList',userList);
       })
 
       socket.on('currentslide',n =>{
