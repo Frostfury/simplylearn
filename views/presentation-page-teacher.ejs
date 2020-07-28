@@ -551,10 +551,10 @@ img {
 
   
   <nav class="navbar">
-    <ul class="navbar-nav">
+    <ul id="list" class="navbar-nav">
       <li class="logo">
         <a href="#" class="nav-link">
-          <span class="link-text logo-text"></span>
+          <span class="link-text logo-text">Simplylearn</span>
           <div class="burger-button">
             <span class="burger-top"></span>
             <span class="burger-middle"></span>
@@ -563,9 +563,6 @@ img {
         
         </a>
       </li>
-      <div id="list">
-
-      </div>
 
       <!-- <li class="nav-item">
         <a href="#" class="nav-link">
@@ -717,20 +714,17 @@ function showSlides(n) {
     })
 
     socket.on('userList',userList =>{
-      var div = document.getElementById("list");
-      div.innerHTML="";
-      console.log(userList);
       if(userList){
         openForm();
-      userList.forEach(function(user){
+      // userList.forEach(function(user){
         let li = document.createElement("li");
         li.classList.add('nav-item');
-        li.innerHTML = ` <a href="#" class="nav-link"><span class="link-text">${user.username}</span></a>`
-        console.log(user.username);
+        li.innerHTML = ` <a href="#" class="nav-link"><span class="link-text">${userList.username}</span></a>`
+        console.log(userList.username);
         // document.getElementById("list").insertAdjacentHTML("afterend",'<li class="nav-item"><a href="#" class="nav-link"><span class="link-text">'+user.username+'</span></a></li>');
         document.querySelector('#list').appendChild(li);
 
-      });
+      // })
       }
     });
 
