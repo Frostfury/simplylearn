@@ -66,6 +66,10 @@ app.get("/info",function(req,res){
     res.render("info");
 });
 
+app.get("/donation",function(req,res){
+    res.render("donation");
+});
+
 app.post("/teacher",uploads.array("pptimages",40),function(req,res){
     var newTeacher = teacherSchema();
     newTeacher.name = req.body.name;
