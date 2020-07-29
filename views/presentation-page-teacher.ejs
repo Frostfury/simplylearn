@@ -336,17 +336,19 @@ img {
   max-width: 300px;
   padding: 10px;
   background-color: white;
+ 
 }
 
 /* Full-width textarea */
 .form-container textarea {
-  width: 100%;
+  width: 77%;
   padding: 15px;
-  margin: 5px 0 22px 0;
+  margin: 6px 9px -21px 1px;
   border: none;
   background: #f1f1f1;
   resize: none;
-  min-height: 350px;
+  min-height: 50px;
+  border-radius: 10px;
 }
 
 /* When the textarea gets focus, do something */
@@ -357,20 +359,25 @@ img {
 
 /* Set a style for the submit/send button */
 .form-container .btn {
-  background-color: #4CAF50;
+  background-color: rgb(46, 208, 46);
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
+  width: 50px;
+ 
   opacity: 0.8;
+  border-radius: 10px;
+ 
 }
+
+
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
   background-color: #ce162e;
 }
+
 
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
@@ -425,14 +432,14 @@ img {
 
 /* Full-width textarea */
 .form-container textarea {
-  width: 200px;
+  width: 75%;
   padding: 15px;
-  margin: 0px 0px 0px 0px;
+  margin: 0px 5px -15px 1px;
 
   border: none;
   background: #f1f1f1;
   resize: none;
-  min-height: 50px;
+  min-height: 42px;
 }
 
 /* When the textarea gets focus, do something */
@@ -450,7 +457,7 @@ img {
   padding: 10px 20px;
   border: none;
   cursor: pointer;
-  width: 200px;
+  width: 42px;
   /* margin-bottom:10px; */
   opacity: 0.8;
 }
@@ -544,7 +551,84 @@ img {
   
 }
 
+
 }
+
+
+#mdiv {
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  border: 2px solid black;
+  margin-left: 240px;
+  border-radius: 10px;
+}
+
+.mdiv {
+  height: 25px;
+  width: 4px;
+  /* margin-left: 24px; */
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  transform: rotate(45deg);
+  Z-index: 1;
+}
+
+.md {
+  height: 25px;
+  width: 4px;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  transform: rotate(90deg);
+  Z-index: 2;
+}
+
+#mdiv:hover{
+    background-color: rgb(189, 10, 10);
+   
+}
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+
+
+    #mdiv {
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  border: 0.5px solid black;
+  margin-left: 180px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.mdiv {
+  height: 12.5px;
+  width: 2px;
+  /* margin-left: 12px; */
+  background-color: #e9e9e9;
+  transform: rotate(45deg);
+  Z-index: 1;
+}
+
+.md {
+  height: 12.5px;
+  width: 2px;
+  background-color: #e9e9e9;
+  transform: rotate(90deg);
+  Z-index: 2;
+}
+
+
+
+}
+
+
+
 </style>
 <body>
 
@@ -641,16 +725,23 @@ img {
 
 <div class="chat-popup" id="myForm">
   <form action="" id="chatForm" class="form-container">
+     <!-- style="margin-left: 210px; align-items: center; width: 50px;height: 50px; "> -->
     
-    <h1>Chat</h1>
-    <div id="txtmsg" style="height: 7rem; overflow:auto;">
+     <button type="button"  onclick="closeForm()" id="mdiv" >
+            <div class="mdiv" style="margin:auto;">
+              <div class="md" ></div>
+            </div>
+          
+    </button>
+    
+    <div id="txtmsg" style="height: 6rem; overflow:auto;">
   </div>
-
+  
     <label for="msg" ><b>Message</b></label>
     <textarea placeholder="Type message.." id="message" name="msg" style="height: 2rem;"></textarea>
 
-    <button type="submit" class="btn" >Send</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    <button type="submit" class="btn" ><b style="font-size: 1rem;">></b></button>
+    
   </form>
 </div>
 
