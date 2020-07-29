@@ -721,7 +721,7 @@ img {
 </div>
 <!-- start  -->
 
-<button class="open-button" onclick="openForm()">Chat</button>
+<button class="open-button" id="chat-color" onclick="openForm()">Chat</button>
 
 <div class="chat-popup" id="myForm">
   <form action="" id="chatForm" class="form-container">
@@ -793,6 +793,7 @@ function showSlides(n) {
 
   function openForm() {
     document.getElementById("myForm").style.display = "block";
+    document.getElementById("chat-color").style.backgroundColor = "#555" ;
   }
   
   function closeForm() {
@@ -800,23 +801,27 @@ function showSlides(n) {
   }
   
     socket.on('newUser',newuser =>{
-      openForm();
+      // openForm();
       // document.getElementById("txtmsg").insertAdjacentHTML("afterend",'<h3 style="color : green">'+newuser+'</h3>'+ 'Joined');
     const div = document.createElement('div');
     div.classList.add('messages');
     div.innerHTML = `  <p class="lead" ><span style="color : green">${newuser} </span >joined </p>`;
     document.querySelector('#txtmsg').appendChild(div);
+    
+    document.getElementById("chat-color").style.backgroundColor = "#349bd9";
     })
 
     socket.on('userList',userList =>{
       var div = document.getElementById("list");
       div.innerHTML="";
       if(userList){
-        openForm();
+        // openForm();
+        var i = 0;
       userList.forEach(function(user){
+        i++;
         let li = document.createElement("li");
         li.classList.add('nav-item');
-        li.innerHTML = ` <a href="#" class="nav-link"><span class="link-text">${user.username}</span></a>`
+        li.innerHTML = ` <a href="#" class="nav-link"><span class="link-text">(${i})  ${user.username}</span></a>`
         console.log(userList.username);
         // document.getElementById("list").insertAdjacentHTML("afterend",'<li class="nav-item"><a href="#" class="nav-link"><span class="link-text">'+user.username+'</span></a></li>');
         document.querySelector('#list').appendChild(li);
@@ -826,7 +831,7 @@ function showSlides(n) {
     });
 
     socket.on('deadUser',newuser =>{
-      openForm();
+      // openForm();
       // console.log("disconnected",newuser);
       const div = document.createElement('div');
       div.classList.add('messages');
@@ -871,6 +876,6 @@ function outputMessage(message){
     }
 };
   </script>
-    
+
 </body>
 </html>
