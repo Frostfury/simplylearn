@@ -4,7 +4,7 @@
   "description": "A application used to make learning more esay",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
+    "start": "node index.js",
     "dev": "nodemon index"
   },
   "repository": {
