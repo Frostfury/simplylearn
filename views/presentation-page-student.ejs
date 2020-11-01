@@ -534,6 +534,15 @@ padding: 1rem;
  
       var  username = document.getElementById('username').innerText;
       var user;
+      var formstudent = document.getElementById('nameform');
+
+      // Adds a listener for the "submit" event.
+        formstudent.addEventListener('submit', function(e) {
+
+         e.preventDefault();
+         Userfn();
+
+          });
 
       function Userfn(){
         username = document.getElementById('username').value;
