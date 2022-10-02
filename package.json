@@ -24,7 +24,7 @@
     "express": "^4.17.1",
     "fs-extra": "^9.0.1",
     "http": "0.0.1-security",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.9.25",
     "multer": "^1.4.2",
     "nodemon": "^2.0.4",
