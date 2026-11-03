@@ -1,4 +1,4 @@
 This program is for educational pourpose.
-To self host the program, First clone the program. Then run npm install all. Start the server.
-The program is written in Node.js
+To self host the program, use Node.js 20.19 or newer and MongoDB 7 or newer. Run npm ci, then npm start.
+See README.md for database configuration, development commands, and integration tests.
 Contact if any issue found

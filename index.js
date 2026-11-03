@@ -1,210 +1,142 @@
-var express                                         =   require('express'),
-    app                                             =   express(),
-    http                                            =   require('http').Server(app),
-    io                                              =   require('socket.io')(http),
-    bodyParser                                      =   require("body-parser"),
-    multer                                          =   require("multer"),
-    mongoose                                        =   require("mongoose"),
-    formatMessage                                   =   require("./utils/messages"),
-    moment                                          =   require("moment"),
-    path                                            =   require('path'),
-    fs                                              =   require('fs-extra'),
-    {userJoin,getCurrentUser,userLeave,getRoom}     =   require("./utils/users"),
-    teacherSchema                                   =   require("./models/teacher");
-    mongoose.connect("mongodb+srv://KappiAdmin:Kappi@123@cluster0.myhwp.gcp.mongodb.net/teacher?retryWrites=true&w=majority", { useNewUrlParser: true });
-// mongoose.connect("mongodb://localhost:27017/simplylearn", { useNewUrlParser: true });
-mongoose.set('useFindAndModify', false);    
+const express = require('express');
+const { createServer } = require('node:http');
+const { Server } = require('socket.io');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const mongoose = require('mongoose');
+const path = require('node:path');
+const fs = require('fs-extra');
+const formatMessage = require('./utils/messages');
+const { userJoin, getCurrentUser, userLeave, getRoom } = require('./utils/users');
+const Teacher = require('./models/teacher');
 
-var storage = multer.diskStorage({
-    destination: function(req,file,cb){
-        let name = req.body.name;
-        let path = './uploads/'+name;
-        fs.mkdirsSync(path);
-      cb(null,path);
-    },
-    filename: function(req,file,cb){
-      cb(null,file.originalname);
-    }
-  });
-  var fileFilter = function(req,file,cb){
-    if(file.mimetype ==='image/png' || file.mimetype==='image/jpeg'){
-      cb(null,true);
-    }
-    else{
-      cb(null,false);
-    }
+const app = express();
+const http = createServer(app);
+const io = new Server(http);
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    const directory = path.join('uploads', req.body.name);
+    fs.mkdirsSync(directory);
+    cb(null, directory);
+  },
+  filename(req, file, cb) {
+    cb(null, file.originalname);
   }
-  var uploads = multer({
-    storage:storage, limits:{
-    fieldSize: 1024*1024*5
-    },
-    fileFilter:fileFilter
+});
+
+const uploads = multer({
+  storage,
+  limits: { fieldSize: 1024 * 1024 * 5 },
+  fileFilter(req, file, cb) {
+    cb(null, file.mimetype === 'image/png' || file.mimetype === 'image/jpeg');
+  }
+});
+
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads'));
+app.use(express.static(path.join(__dirname, 'views')));
+
+app.get('/', (req, res) => res.render('index'));
+app.get('/teacher', (req, res) => res.render('teacher'));
+app.get('/student', (req, res) => res.render('student'));
+app.get('/info', (req, res) => res.render('info'));
+app.get('/donation', (req, res) => res.render('donation'));
+
+app.post('/teacher', uploads.array('pptimages', 40), async (req, res) => {
+  try {
+    const teacher = new Teacher({
+      name: req.body.name,
+      classname: req.body.classname,
+      pptimages: req.files.map(file => file.path)
+    });
+    const saved = await teacher.save();
+    res.redirect('/teacher/' + saved._id);
+  } catch (error) {
+    console.error(error);
+    res.redirect('/teacher');
+  }
+});
+
+function renderClassroom(view) {
+  return async (req, res) => {
+    try {
+      const data = await Teacher.findById(req.params.id);
+      if (!data) return res.redirect('/teacher');
+      res.render(view, { data });
+    } catch (error) {
+      console.error(error);
+      res.redirect('/teacher');
+    }
+  };
+}
+
+app.get('/teacher/:id', renderClassroom('linkshare'));
+app.get('/session/:id/teacher', renderClassroom('presentation-page-teacher'));
+app.get('/session/:id/recordteacher', renderClassroom('working-on-this'));
+app.get('/session/:id', renderClassroom('presentation-page-student'));
+
+app.post('/session/:id/teacher', async (req, res) => {
+  try {
+    const data = await Teacher.findById(req.params.id);
+    if (!data) return res.redirect('/teacher');
+    await fs.remove(path.join('uploads', data.name));
+    await Teacher.deleteOne({ _id: data._id });
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.redirect('/teacher');
+  }
+});
+
+io.on('connection', socket => {
+  socket.on('joinRoom', ({ username, room }) => {
+    const user = userJoin(socket.id, username, room);
+    socket.join(user.room);
+    io.to(user.room).emit('newUser', username);
+    io.to(user.room).emit('userList', getRoom(room));
   });
-  
 
-app.set("view engine","ejs");
-app.use(bodyParser.urlencoded({extended:true}));
-app.use('/uploads',express.static('uploads'));
-app.use(express.static(path.join(__dirname,"views")));
+  socket.on('currentslide', n => {
+    const user = getCurrentUser(socket.id);
+    if (user) io.to(user.room).emit('changeslide', n);
+  });
 
+  socket.on('chatMessage', msg => {
+    const user = getCurrentUser(socket.id);
+    if (user) io.to(user.room).emit('message', formatMessage(user.username, msg));
+  });
 
-const PORT = process.env.PORT || 1690   
-
-app.get("/",function(req,res){
-    res.render("index");
+  socket.on('disconnect', () => {
+    const user = getCurrentUser(socket.id);
+    userLeave(socket.id);
+    if (user) {
+      io.to(user.room).emit('deadUser', user.username);
+      io.to(user.room).emit('userList', getRoom(user.room));
+    }
+  });
 });
 
-app.get("/teacher",function(req,res){
-    res.render("teacher");
-});
-
-app.get("/student",function(req,res){
-    res.render("student");
-});
-
-app.get("/info",function(req,res){
-    res.render("info");
-});
-
-app.get("/donation",function(req,res){
-    res.render("donation");
-});
-
-app.post("/teacher",uploads.array("pptimages",40),function(req,res){
-    var newTeacher = teacherSchema();
-    newTeacher.name = req.body.name;
-    newTeacher.classname = req.body.classname;
-    req.files.forEach(function(file){
-        newTeacher.pptimages.push(file.path);
+async function start(port = process.env.PORT || 1690) {
+  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/simplylearn';
+  await mongoose.connect(uri);
+  return new Promise((resolve, reject) => {
+    http.once('error', reject);
+    http.listen(port, () => {
+      http.off('error', reject);
+      console.log('Running on ' + http.address().port);
+      resolve(http);
     });
-    newTeacher.save(function(err,savedata){
-        if(err){
-            console.log(err);
-            res.redirect("/teacher");
-        }
-        else{
+  });
+}
 
-            res.redirect("/teacher/"+savedata._id);
-        }
-    })
-});
+if (require.main === module) {
+  start().catch(() => {
+    console.error('Unable to start the server. Check MongoDB connectivity and PORT.');
+    io.close();
+    mongoose.disconnect().finally(() => { process.exitCode = 1; });
+  });
+}
 
-app.get("/teacher/:id",function(req,res){
-    teacherSchema.findById(req.params.id,function(err,data){
-        if(err){
-            console.log(err);
-            res.redirect("/teacher");
-        }
-        else{
-            console.log(data);
-            res.render("linkshare",{data:data});
-        }
-    });
-});
-
-app.get("/session/:id/teacher",function(req,res){
-    teacherSchema.findById(req.params.id,function(err,data){
-        if(err){
-            console.log(err);
-            res.redirect("/teacher");
-        }
-        else{
-            res.render("presentation-page-teacher",{data:data});
-        }
-    });
-});
-
-app.get("/session/:id/recordteacher",function(req,res){
-    teacherSchema.findById(req.params.id,function(err,data){
-        if(err){
-            console.log(err);
-            res.redirect("/teacher");
-        }
-        else{
-            res.render("working-on-this",{data:data});
-        }
-    });
-});
-
-
-app.get("/session/:id",function(req,res){
-    teacherSchema.findById(req.params.id,function(err,data){
-        if(err){
-            console.log(err);
-            res.redirect("/teacher");
-        }
-        else{
-            res.render("presentation-page-student",{data:data});
-        }
-    });
-});
-
-app.post("/session/:id/teacher",function(req,res){
-    teacherSchema.findById(req.params.id,function(err,data){
-        if(err){
-            console.log(err);
-            res.redirect("/teacher");
-        }
-        else{
-            let path = './uploads/'+data.name;
-            fs.remove(path,function(err){
-                if(err){
-                    console.log(err);
-                    res.redirect("/teacher");
-                }
-                else{
-                    teacherSchema.deleteOne({_id:data._id},function(err){
-                        if(err){
-                            console.log(err);
-                            res.redirect("/teacher");
-                        }
-                        else{
-                            res.redirect("/");
-                        }
-                    })
-                }
-            })
-        }
-    })
-})
-
-io.on('connection',function(socket){
-    socket.on('joinRoom',({username,room})=>{
-        const user = userJoin(socket.id,username, room);
-        socket.join(user.room);
-        var userList = getRoom(room);
-        io.to(user.room).emit('newUser',username);
-        io.to(user.room).emit('userList',userList);
-      })
-
-      socket.on('currentslide',n =>{
-        const user = getCurrentUser(socket.id);
-        io.to(user.room).emit('changeslide',n);
-
-      })
-    //   socket.on('userLive',username =>{
-    //     const user = getCurrentUser(socket.id);
-    //     socket.username=username;
-
-    //   })
-
-      socket.on('chatMessage', msg =>{
-        const user = getCurrentUser(socket.id);
-        io.to(user.room).emit('message', formatMessage(user.username,msg));
-      });
-
-    socket.on('disconnect',()=>{
-        const user = getCurrentUser(socket.id);
-        userLeave(socket.id);
-        if(user){
-         var userList = getRoom(user.room);
-            io.to(user.room).emit('deadUser',user.username);
-            io.to(user.room).emit('userList',userList);
-        }
-      });
-});
-
-
-server=http.listen(PORT,function(){
-    console.log("Runnning on 1690");
-});
+module.exports = { app, http, io, start };
